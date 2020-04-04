@@ -81,6 +81,20 @@ namespace Cw3.Controllers
              _dbService.GetStudents().ToList().Remove(student);
             return Ok($"Student {id} usunięty pomyślnie");
         }
+
+        [HttpGet("{idStudenta}/wpis")]
+        public IActionResult getEnrollment(int idStudenta)
+        {
+            try
+            {
+                SQLServerDbService sqlServer = (SQLServerDbService) _dbService;
+                return Ok(sqlServer.GetEnrollment(idStudenta));
+            }
+            catch (ArgumentException)
+            {
+                return NotFound($"Could not find student with id = {idStudenta}");
+            }
+        }
     }
 
 }
