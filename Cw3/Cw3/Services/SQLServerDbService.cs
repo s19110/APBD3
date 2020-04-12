@@ -30,29 +30,29 @@ namespace Cw3.DAL
 
                 connection.Open();
                 var dataReader = command.ExecuteReader();
-                int id = 1;
+                
                 while (dataReader.Read())
                 {
                     var student = new Student();
-                    student.IdStudent = id++;
+                 //   student.IdStudent = id++;
                     student.FirstName = dataReader["FirstName"].ToString();
                     student.LastName = dataReader["LastName"].ToString();
                     student.IndexNumber = dataReader["IndexNumber"].ToString();
                     student.BirthDate = DateTime.Parse(dataReader["BirthDate"].ToString());
-                    student.SemesterNumber = int.Parse(dataReader["Semester"].ToString());
-                    student.StudyName = dataReader["Name"].ToString();
+                   // student.SemesterNumber = int.Parse(dataReader["Semester"].ToString());
+                   // student.StudyName = dataReader["Name"].ToString();
                     studentList.Add(student);
                 }
                 return studentList;
             }        
         }
 
-        public Enrollment GetEnrollment(int idStudenta)
+        public Enrollment GetEnrollment(String idStudenta)
         {
             Student szukany = null;
             foreach(Student s in GetStudents())
             {
-                if(s.IdStudent == idStudenta)
+                if(s.IndexNumber == idStudenta)
                 {
                     szukany = s;
                     break;

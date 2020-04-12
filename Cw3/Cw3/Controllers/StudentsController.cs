@@ -32,7 +32,7 @@ namespace Cw3.Controllers
       //  }
 
         [HttpGet("{id}")]
-        public IActionResult GetStudent(int id)
+        public IActionResult GetStudent(String id)
         {
             //if (id == 1) {
             //    return Ok("Kowalski");
@@ -41,7 +41,7 @@ namespace Cw3.Controllers
             //    return Ok("Malewski");
             //}
             //return NotFound("Nie znaleziono studenta");
-            Student student = _dbService.GetStudents().ToList().Find(i => i.IdStudent == id);
+            Student student = _dbService.GetStudents().ToList().Find(i => i.IndexNumber == id);
             if (student == null)
                 return NotFound("Nie znaleziono studenta");
             return Ok(student);
@@ -59,9 +59,9 @@ namespace Cw3.Controllers
 
         //Zadanie 7
         [HttpPut("{id}")]
-        public IActionResult updateStudent(int id)
+        public IActionResult updateStudent(String id)
         {
-            Student student = _dbService.GetStudents().ToList().Find(i => i.IdStudent == id);
+            Student student = _dbService.GetStudents().ToList().Find(i => i.IndexNumber == id);
             if (student == null)
                 return BadRequest($"Student o id {id} nie został znaleziony");
             else 
@@ -72,9 +72,9 @@ namespace Cw3.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult deleteStudent(int id)
+        public IActionResult deleteStudent(String id)
         {
-            Student student = _dbService.GetStudents().ToList().Find(i => i.IdStudent == id);
+            Student student = _dbService.GetStudents().ToList().Find(i => i.IndexNumber == id);
             if (student == null)
                 return BadRequest($"Student o id {id} nie został znaleziony");
             //Linijka poniżej nic nie robi, ale chciałem "zasymulować" usuwanie
@@ -83,7 +83,7 @@ namespace Cw3.Controllers
         }
 
         [HttpGet("{idStudenta}/wpis")]
-        public IActionResult getEnrollment(int idStudenta)
+        public IActionResult getEnrollment(String idStudenta)
         {
             try
             {
