@@ -20,6 +20,11 @@ namespace Cw3.DAL
             };
         }
 
+        public Student GetStudent(string IndexNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Student> GetStudents()
         {
             return _students;

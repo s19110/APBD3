@@ -1,0 +1,17 @@
+HTTP:GET;PATH:/api/students;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:?orderBy=last%20name
+HTTP:GET;PATH:/api/students;BODY:;QUERYSTRING:
+HTTP:GET;PATH:/api/students;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:?orderBy=last%20name
+HTTP:GET;PATH:/api/enrollments;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/promotions;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:

@@ -75,7 +75,7 @@ namespace Cw3.Services
                         dr.Dispose();
                         //Wstawianie nowego zapisu do bazy danych
                         //Używam zagnieżdżonego selecta zamiast Identity, bo nie korzystałem z niego od początku
-                        com.CommandText = "INSERT into Enrollment(IdEnrollment, Semester, StartDate, IdStudy) values ((Select MAX(IdEnrollment)+1 From Enrollment),1, SYSDATETIME(),@id)";
+                        com.CommandText = "INSERT into Enrollment(IdEnrollment, Semester, StartDate, IdStudy) values ((Select ISNULL(MAX(IdEnrollment),1)+1 From Enrollment),1, SYSDATETIME(),@id)";
                    
                         com.ExecuteNonQuery();
 

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cw3.DAL;
+using Cw3.Exceptions;
 using Cw3.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cw3.Controllers
@@ -25,11 +27,16 @@ namespace Cw3.Controllers
             return Ok(_dbService.GetStudents());
         }
 
-      //  [HttpGet]
-      //  public string GetStudents(string orderBy)
-      //  {
-      //      return $"Kowalski, Malewski, Andrzejewski sortowanie={orderBy}";
-      //  }
+        [HttpGet("secured")]
+        public IActionResult GetStudentsSecured(string orderBy)
+        {
+            return Ok(_dbService.GetStudents());
+        }
+        //  [HttpGet]
+        //  public string GetStudents(string orderBy)
+        //  {
+        //      return $"Kowalski, Malewski, Andrzejewski sortowanie={orderBy}";
+        //  }
 
         [HttpGet("{id}")]
         public IActionResult GetStudent(String id)
@@ -41,10 +48,40 @@ namespace Cw3.Controllers
             //    return Ok("Malewski");
             //}
             //return NotFound("Nie znaleziono studenta");
-            Student student = _dbService.GetStudents().ToList().Find(i => i.IndexNumber == id);
-            if (student == null)
-                return NotFound("Nie znaleziono studenta");
-            return Ok(student);
+            try
+            {
+                return Ok(_dbService.GetStudent(id));
+            }catch (StudentNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet("secured/{index}")]
+        public IActionResult GetStudentSecured(String index)
+        {
+            //if (id == 1) {
+            //    return Ok("Kowalski");
+            //} else if (id == 2)
+            //{
+            //    return Ok("Malewski");
+            //}
+            //return NotFound("Nie znaleziono studenta");
+            try
+            {
+                return Ok(_dbService.GetStudent(index));
+            }
+            catch (StudentNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,ex.Message);
+            }
         }
 
         [HttpPost]
