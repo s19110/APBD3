@@ -11,19 +11,20 @@ namespace Cw3.Services
     public class SqlServerStudentDbService : IStudentDbService
     {
 
-
-        private static string DataSource, InitialCatalog, IntegratedSecurity;
+        private static SqlConnectionStringBuilder builder;
+        
 
         static SqlServerStudentDbService()
         {
-            DataSource = "db-mssql";
-            InitialCatalog = "s19110";
-            IntegratedSecurity = "true";
+            builder["Data Source"] = "db-mssql";
+            builder["Initial Catalog"] = "s19110";
+            builder["Integrated Security"] = "true";
+            builder["MultipleActiveResultSets"] = "True";
         }
 
         public EnrollStudentResponse EnrollStudent(EnrollStudentRequest request)
         {
-            using (var con = new SqlConnection($"Data Source={DataSource};Initial Catalog={InitialCatalog};Integrated Security={IntegratedSecurity};MultipleActiveResultSets=True;"))
+            using (var con = new SqlConnection(builder.ConnectionString))
             using (var com = new SqlCommand())
             {
                 com.Connection = con;
@@ -133,7 +134,7 @@ namespace Cw3.Services
 
         public PromoteStudentResponse PromoteStudents(int semester, string studies)
         {
-            using (var con = new SqlConnection($"Data Source={DataSource};Initial Catalog={InitialCatalog};Integrated Security={IntegratedSecurity};MultipleActiveResultSets=True;"))
+            using (var con = new SqlConnection(builder.ConnectionString))
             using (var com = new SqlCommand())
             {
                 com.Connection = con;

@@ -15,3 +15,23 @@ HTTP:GET;PATH:/api/enrollments/promotions;BODY:{
 "Studies": "IT",
 "Semester": 2
 };QUERYSTRING:
+HTTP:GET;PATH:/api/students;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:
+HTTP:GET;PATH:/api/secured/students;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:
+HTTP:GET;PATH:/api/secured/students;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:
+HTTP:GET;PATH:/api/secured/students;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:
+HTTP:GET;PATH:/api/students/secured;BODY:{
+"Studies": "IT",
+"Semester": 2
+};QUERYSTRING:

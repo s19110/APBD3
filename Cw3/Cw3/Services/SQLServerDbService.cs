@@ -10,17 +10,18 @@ namespace Cw3.DAL
 {
     public class SQLServerDbService : IDbService
     {
-      private static string DataSource, InitialCatalog, IntegratedSecurity;
+        private static SqlConnectionStringBuilder builder;
 
         static SQLServerDbService()
         {
-            DataSource = "db-mssql";
-            InitialCatalog = "s19110";
-            IntegratedSecurity = "true";
+            builder = new SqlConnectionStringBuilder();
+            builder["Data Source"] = "db-mssql";
+            builder["Initial Catalog"] = "s19110";
+            builder["Integrated Security"] = "true";       
         }
         public IEnumerable<Student> GetStudents()
         {
-            using (var connection = new SqlConnection($"Data Source={DataSource};Initial Catalog={InitialCatalog};Integrated Security={IntegratedSecurity}"))
+            using (var connection = new SqlConnection(builder.ConnectionString))
             using (var command = new SqlCommand())
             {
                 command.Connection = connection;
@@ -62,7 +63,7 @@ namespace Cw3.DAL
             if(szukany == null)
             throw new ArgumentException();
            
-            using (var connection = new SqlConnection($"Data Source={DataSource};Initial Catalog={InitialCatalog};Integrated Security={IntegratedSecurity}"))
+            using (var connection = new SqlConnection(builder.ConnectionString))
             using (var command = new SqlCommand())
             {
                 command.Connection = connection;
@@ -87,7 +88,7 @@ namespace Cw3.DAL
 
         public Student GetStudent(string IndexNumber)
         {
-            using (var connection = new SqlConnection($"Data Source={DataSource};Initial Catalog={InitialCatalog};Integrated Security={IntegratedSecurity}"))
+            using (var connection = new SqlConnection(builder.ConnectionString))
             using (var command = new SqlCommand())
             {
                 command.Connection = connection;
