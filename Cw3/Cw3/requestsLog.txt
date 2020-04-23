@@ -35,3 +35,298 @@ HTTP:GET;PATH:/api/students/secured;BODY:{
 "Studies": "IT",
 "Semester": 2
 };QUERYSTRING:
+HTTP:GET;PATH:/api/students;BODY:;QUERYSTRING:
+HTTP:GET;PATH:/favicon.ico;BODY:;QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments;BODY:{
+	"IndexNumber" = "s1111",
+	"FirstName" = "Andrzej",
+	"LastName" = "Jankowski",
+	"BirthDate" = "1986-03-06",
+	"Studies" = "New Media Arts"
+	
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+	"Login": "s3333",
+	"Password": "456"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+	"Login": "s3333",
+	"Password": "456"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+	"Studies":"New Media Arts",
+	"Semester":5
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+	"Studies":"New Media Arts",
+	"Semester":5
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+	"Studies":"New Media Arts",
+	"Semester":1
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+ "Login":"xdd",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/login;BODY:{
+ "Login":"xdd",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login":"xdd",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login":"xdd",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login":"s1234",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login":"s1233",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login":"s9999",
+ "Password":"1a2b3c"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+ "Studies":"New Media Arts"
+ "Semester":1
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+ "Login":"s1234",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login":"s1234",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login":"s1234",
+ "Password":"123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/promotions;BODY:{
+ "Studies":"New Media Arts"
+ "Semester":1
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+ "Studies":"New Media Arts"
+ "Semester":1
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+ "Studies":"New Media Arts",
+ "Semester":1
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/login;BODY:{
+"Login": "s4200",
+"Password": "xyz"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "s4200",
+"Password": "xyz"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/promotions;BODY:{
+" "Studies":"New Media Arts",
+ "Semester":1"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/login;BODY:{
+"Login": "XDD",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "XDD",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "XDD",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "XDD",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:?token=844b6797-a26a-433d-96b6-531c0e4c8693
+HTTP:POST;PATH:/api/enrollments/refresh-token;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:?refToken=844b6797-a26a-433d-96b6-531c0e4c8693
+HTTP:POST;PATH:/api/enrollments/refresh-token;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:?refToken=844b6797-a26a-433d-96b6-531c0e4c8693
+HTTP:POST;PATH:/api/enrollments/refresh-token/=844b6797-a26a-433d-96b6-531c0e4c8693;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/=844b6797-a26a-433d-96b6-531c0e4c8693;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/844b6797-a26a-433d-96b6-531c0e4c8693;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/844b6797-a26a-433d-96b6-531c0e4c8693;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token844b6797-a26a-433d-96b6-531c0e4c8693;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/844b6797-a26a-433d-96b6-531c0e4c8693;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/change-password;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/login;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"avc"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"avc"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"avc"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"avc"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"avc"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"avc"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"avc"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"avc"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"newPassword":"lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/6e5a8e60-10a6-4c81-b5e9-e38338a9b204;BODY:{
+"newPassword":"lol"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/refresh-token/6e5a8e60-10a6-4c81-b5e9-e38338a9b204;BODY:{
+"newPassword":"lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/6e5a8e60-10a6-4c81-b5e9-e38338a9b204;BODY:{
+"newPassword":"lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/6e5a8e60-10a6-4c81-b5e9-e38338a9b204;BODY:{
+"newPassword":"lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/login;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+"Login": "s1234",
+"Password": "123"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/change-password;BODY:{
+"NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password/lol;BODY:{
+"NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+"NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+  "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+  "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+  "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+ "OldPassword": "123"
+ "NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/refresh-token/1557b583-b3f6-4bea-b2e0-82eedb71ad36;BODY:{
+ "OldPassword": "123"
+ "NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollment/refresh-token/1557b583-b3f6-4bea-b2e0-82eedb71ad36;BODY:{
+ "OldPassword": "123"
+ "NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/refresh-token/1557b583-b3f6-4bea-b2e0-82eedb71ad36;BODY:{
+ "OldPassword": "123"
+ "NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+ "OldPassword": "123"
+ "NewPassword": "lol"
+};QUERYSTRING:
+HTTP:POST;PATH:/api/enrollments/change-password;BODY:{
+ "OldPassword": "123",
+ "NewPassword": "lol"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login": "s1234",
+ "Password": "lol"
+};QUERYSTRING:
+HTTP:GET;PATH:/api/enrollments/login;BODY:{
+ "Login": "s1234",
+ "Password": "123"
+};QUERYSTRING:

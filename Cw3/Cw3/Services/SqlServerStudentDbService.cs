@@ -1,9 +1,11 @@
 ﻿using Cw3.DTOs.Requests;
 using Cw3.DTOs.Responses;
+using Cw3.Other;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Cw3.Services
@@ -11,7 +13,7 @@ namespace Cw3.Services
     public class SqlServerStudentDbService : IStudentDbService
     {
 
-        private static SqlConnectionStringBuilder builder;
+        private static SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
         
 
         static SqlServerStudentDbService()
@@ -21,6 +23,8 @@ namespace Cw3.Services
             builder["Integrated Security"] = "true";
             builder["MultipleActiveResultSets"] = "True";
         }
+
+       
 
         public EnrollStudentResponse EnrollStudent(EnrollStudentRequest request)
         {
@@ -210,5 +214,135 @@ namespace Cw3.Services
 
 
             }
+        public bool CheckPassword(LoginRequestDTO request)
+        {
+            using (var con = new SqlConnection(builder.ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+
+                // Sprawdzanie haseł sprzed ich zabezpieczenia
+                //   com.CommandText = "SELECT 1 FROM Student WHERE IndexNumber=@number AND Password=@Password";              
+                //   com.Parameters.AddWithValue("number", request.Login);
+                //  com.Parameters.AddWithValue("Password", request.Password);
+                
+                //    var dr = com.ExecuteReader();
+                
+                //   return dr.Read();
+
+                com.CommandText = "SELECT Password,Salt FROM Student WHERE IndexNumber=@number";
+                com.Parameters.AddWithValue("number", request.Login);
+
+                using var dr = com.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    return SecurePassword.Validate(request.Password, dr["Salt"].ToString(), dr["Password"].ToString());
+                }
+                return false; //Nie ma nawet takiego indeksu w bazie danych
+
+
+            }
+        }
+
+        public Claim[] GetClaims(string IndexNumber)
+        {
+            using (var con = new SqlConnection(builder.ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+
+                com.CommandText = "select Student.IndexNumber,FirstName,LastName,Role" +
+                    " from Student_Roles Join Roles on Student_Roles.IdRole = Roles.IdRole join Student on Student.IndexNumber = Student_Roles.IndexNumber" +
+                    " where Student.IndexNumber=@Index;";
+                com.Parameters.AddWithValue("Index", IndexNumber);
+
+                var dr = com.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    //Na starcie używam listy, bo nie wiem, ile ról ma dany użytkownik
+                    var claimList = new List<Claim>();
+                    claimList.Add(new Claim(ClaimTypes.NameIdentifier, dr["IndexNumber"].ToString()));
+                    claimList.Add(new Claim(ClaimTypes.Name, dr["FirstName"].ToString() + " " + dr["LastName"].ToString())); //Nie wiem czy dawanie imienia i nazwiska w JWT to dobry pomysł, ale nie wiem jakie claimy warto utworzyć
+                    claimList.Add(new Claim(ClaimTypes.Role, dr["Role"].ToString()));
+
+                    while (dr.Read())
+                    {
+                        claimList.Add(new Claim(ClaimTypes.Role, dr["Role"].ToString()));
+                    }
+                    return claimList.ToArray<Claim>();
+                }
+                else return null;
+                  
+
+
+            }
+        }
+
+        public void SetRefreshToken(string token, string IndexNumber)
+        {
+            using (var con = new SqlConnection(builder.ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+
+                com.CommandText = "UPDATE Student SET RefreshToken=@token, TokenExpirationDate=@expires WHERE IndexNumber=@IndexNumber";
+                com.Parameters.AddWithValue("token", token);
+                com.Parameters.AddWithValue("expires", DateTime.Now.AddDays(2));
+                com.Parameters.AddWithValue("IndexNumber", IndexNumber);
+
+               var dr = com.ExecuteNonQuery();
+
+
+            }
+        }
+
+        public string CheckRefreshToken(string token)
+        {
+            using (var con = new SqlConnection(builder.ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+
+                com.CommandText = "SELECT IndexNumber FROM STUDENT WHERE RefreshToken=@token AND TokenExpirationDate > @expires";
+                com.Parameters.AddWithValue("token", token);
+                com.Parameters.AddWithValue("expires", DateTime.Now);             
+
+             using var dr = com.ExecuteReader();
+
+                if (dr.Read())
+                    return dr["IndexNumber"].ToString();
+                else
+                    return null;
+
+
+            }
+        }
+
+        public void SetPassword(string password,string IndexNumber)
+        {
+            using (var con = new SqlConnection(builder.ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+
+                com.CommandText = "Update Student set Password=@Password, Salt=@Salt WHERE IndexNumber=@IndexNumber";
+                var salt = SecurePassword.CreateSalt();
+                var hashedPassword = SecurePassword.Create(password, salt);
+                com.Parameters.AddWithValue("Password", hashedPassword);
+                com.Parameters.AddWithValue("Salt", salt);
+                com.Parameters.AddWithValue("IndexNumber", IndexNumber);
+
+                var dr = com.ExecuteNonQuery();
+
+
+            }
+        }
     }
 }
